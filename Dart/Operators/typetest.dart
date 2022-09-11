@@ -9,4 +9,14 @@ main() {
   print(type3 is String);
   print(type4 is double);
   print(type4 is! double);
+
+  /*
+
+  There are three typecast operators:
+
+    as - typecast
+    is - True if the object has the specified type
+    is! - False if the object has the specified type
+
+  */
 }
