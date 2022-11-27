@@ -1,7 +1,42 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+/*
+class YourWebView extends StatelessWidget {
+  String url;
+  YourWebView(this.url);
+
+  final Completer<WebViewController> _controller = Completer<WebViewController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("TV App"),
+      ),
+      body: Builder(builder: (BuildContext context) {
+        return WebView(
+          initialUrl: url,
+          javascriptMode: JavascriptMode.unrestricted,
+          onWebViewCreated: (WebViewController webViewController) {
+            _controller.complete(webViewController);
+          },
+          onPageStarted: (String url) {
+            print('Seite wird geladen: $url');
+          },
+          onPageFinished: (String url) {
+            print('Seite wurde geladen: $url');
+          },
+          gestureNavigationEnabled: true,
+        );
+    })
+    );
+  }
+}*/
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget{
@@ -22,21 +57,72 @@ class MyApp extends StatelessWidget{
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
+  //@override
+  //_MyHomePageState createState() => _MyHomePageState();
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+  /*
+  int _counter = 0;
+
+  void _incrementCounter()
+  {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  inform(given_url) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => YourWebView(given_url))
+    );
+  }
+
+  @override
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("TV App"),
+      ),
+      body: Center(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: inform("https://www.altenburg.tv/"),
+                child: Text("TV Altenburg"),
+              ),
+            ],
+          ),
+        ),
+      ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: Icon(Icons.add),
+        ),
+    );
+  }*/
+
+  late WebViewController _webViewController;
 
   final List<Widget> _pages = <Widget>[
-    Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text("Home"),
-          Icon(Icons.home),
-        ],
+
+    Scaffold(
+      appBar: AppBar(
+        title: Text("TV App"),
+      ),
+      body: WebView(
+        initialUrl: 'https://www.altenburg.tv/',
+        javascriptMode: JavascriptMode.unrestricted,
+        onWebViewCreated: (WebViewController controller) {
+          _webViewController = controller;
+        },
       ),
     ),
     Center(
@@ -58,6 +144,30 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
   ];
+
+
+
+
+
+    /*Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: ElevatedButton(
+          child: Text('Open URL'),
+          onPressed: // inform("https://www.altenburg.tv/"),
+        ),
+      ),
+    ),
+    Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text("Home"),
+          Icon(Icons.home),
+        ],
+      ),
+    ),*/
+
 
   void _onItemTapped(int index) {
     setState(() {
